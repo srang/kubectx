@@ -1,4 +1,8 @@
-This repository provides both `kubectx` and `kubens` tools.
+# kubctx
+_Now with OpenShift support_
+
+This repository provides both `kubectx` and `kubens` tools for working with kubernetes clusters, and `octx` and `ocns` 
+tools for working with OpenShift clusters.
 
 
 **`kubectx`** helps you switch between clusters back and forth:
@@ -70,6 +74,72 @@ Active namespace is "default".
 ```
 
 `kubens` also supports <kbd>Tab</kbd> completion on bash/zsh/fish shells.
+
+-----
+
+# octx(1)
+
+octx is an utility to manage and switch between oc(1) contexts.
+
+```
+USAGE:
+  octx                   : list the contexts
+  octx <NAME>            : switch to context <NAME>
+  octx -                 : switch to the previous context
+  octx <NEW_NAME>=<NAME> : rename context <NAME> to <NEW_NAME>
+  octx <NEW_NAME>=.      : rename current-context to <NEW_NAME>
+  octx -d <NAME>         : delete context <NAME> ('.' for current-context)
+                              (this command won't delete the user/cluster entry
+                              that is used by the context)
+```
+
+### Usage
+
+```sh
+$ octx minishift
+Switched to context "minishift".
+
+$ octx -
+Switched to context "oregon".
+
+$ octx -
+Switched to context "minishift".
+
+$ octx dublin=gke_ahmetb_europe-west1-b_dublin
+Context "dublin" set.
+Aliased "gke_ahmetb_europe-west1-b_dublin" as "dublin".
+```
+
+`octx` supports <kbd>Tab</kbd> completion on bash/zsh/fish shells to help with
+long context names. You don't have to remember full context names anymore.
+
+-----
+
+# ocns(1)
+
+ocns is an utility to switch between OpenShift namespaces.
+
+```
+USAGE:
+  ocns                    : list the namespaces
+  ocns <NAME>             : change the active namespace
+  ocns -                  : switch to the previous namespace
+```
+
+
+### Usage
+
+```sh
+$ ocns kube-system
+Context "test" set.
+Active namespace is "kube-system".
+
+$ ocns -
+Context "test" set.
+Active namespace is "default".
+```
+
+`ocns` also supports <kbd>Tab</kbd> completion on bash/zsh/fish shells.
 
 -----
 

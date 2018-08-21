@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #
-# kubectx(1) is a utility to manage and switch between kubectl contexts.
-# octx is an openshift oriented fork of the kubectx project
+# octx(1) is a utility to manage and switch between oc contexts.
 
 # Copyright 2017 Google Inc.
 #
@@ -35,8 +34,7 @@ USAGE:
   octx -d <NAME> [<NAME...>] : delete context <NAME> ('.' for current-context)
                                   (this command won't delete the user/cluster entry
                                   that is used by the context)
-
-  octx -h,--help         : show this message
+  octx -h,--help             : show this message
 EOF
   exit 1
 }
@@ -154,7 +152,7 @@ rename_context() {
 }
 
 delete_contexts() {
-  IFS=' ' read -ra CTXS <<< "${1}"
+  IFS=' ' read -ra CTXS <<< "${@}"
   for i in "${CTXS[@]}"; do
     delete_context "${i}"
   done
